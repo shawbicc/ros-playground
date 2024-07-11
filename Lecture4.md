@@ -143,10 +143,16 @@ ros_ws
         |--- src
 ```
 
-If you decide to add/remove dependencies to your package, you will need to update your `package.xml` file. Add the dependencies as `<depend>` and `<exec_depend>` in the `package.xml` file. For example:
+If you decide to add/remove dependencies to your package, you will need to update your `package.xml` file. Add the dependencies as `<depend>` and `<exec_depend>` in the `package.xml` file. For Python nodes, you will need to add that dependency as `<exec_depend>`. For example:
 
 ```
-<depend> dependency4 </depend>
+<exec_depend> dependency4 </exec_depend>
+```
+
+For C++ nodes, you will need to add dependencies as `<build_depend>` and/or `<exec_depend>` based on what type of dependency that package is.
+
+```
+<build_depend> dependency4 </build_depend>
 
 <exec_depend> dependency4 </exec_depend>
 ```
