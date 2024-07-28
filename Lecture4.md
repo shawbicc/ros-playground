@@ -96,8 +96,9 @@ Catkin combines CMake macros and Python scripts to provide some functionality on
 In order to create and use a ROS package, we need to have a ROS workspace set up with catkin and build the packages in it. For creating a workspace, we need to create a folder and run `catkin_make`.
 
 ```
-$ mkdir ros_ws
-$ cd ros_ws
+$ cd ~/
+$ mkdir tutorial_ws
+$ cd tutorial_ws
 $ mkdir src
 $ catkin_make
 ```
@@ -105,8 +106,9 @@ $ catkin_make
 > **Note:** You have to run `catkin_make` at the **workspace** folder every time you add or create a new package. To streamline this process and better manage the packages, we can use *catkin_tools* commands instead of running `catkin_make`.
 > To install `catkin_tools`, follow the instructions [here](https://catkin-tools.readthedocs.io/en/latest/installing.html). Then, you can run the following commands:
 >```
->$ mkdir ros_ws
->$ cd ros_ws
+>$ cd ~/
+>$ mkdir tutorial_ws
+>$ cd tutorial_ws
 >$ mkdir src
 >$ catkin build
 >```
@@ -114,7 +116,7 @@ $ catkin_make
 
 ### Creating From Scratch <a class="anchor" id="scratch"></a>
 
-To create a ROS package from scratch, run the `catkin_create_pkg` command on the terminal at the `ros_ws/src` directory. The syntax for the command is as follows:
+To create a ROS package from scratch, run the `catkin_create_pkg` command on the terminal at the `tutorial_ws/src` directory. The syntax for the command is as follows:
 
 ```
 catkin_create_pkg package_name dependency1 dependency2 dependency3
@@ -125,19 +127,19 @@ Here, the `package_name` is the name you want to give to your package, and `depe
 Here's an example of creating a package:
 
 ```
-# assuming the workspace is created in ~/ros_ws directory
-$ cd ~/ros_ws/src
-$ catkin_create_pkg ros_tutorial_pkg roscpp rospy std_msgs geometry_msgs
+# assuming the workspace is created in ~/tutorial_ws directory
+$ cd ~/tutorial_ws/src
+$ catkin_create_pkg tutorial_pkg roscpp rospy std_msgs geometry_msgs
 ```
 
 Now you should see your package being built, and the package directory should look something like this:
 
 ```
-ros_ws
+tutorial_ws
 |--- build
 |--- devel
 |--- src
-    |--- ros_tutorial_pkg
+    |--- tutorial_pkg
         |--- CMakeLists.txt
         |--- package.xml
         |--- src
@@ -161,7 +163,7 @@ To learn more about different types of dependencies, check [this](https://wiki.r
 
 ### Installing Pre-existing Packages <a class="anchor" id="existing"></a>
 
-There exists many useful ROS packages that can be installed into a workspace. We will be covering how you can install an external ROS package using GitHub and Apt.
+There are many useful ROS packages out there that can be installed into a workspace. We will be covering how you can install an external ROS package using GitHub and Apt.
 
 #### From GitHub <a class="anchor" id="github"></a>
 
@@ -169,7 +171,7 @@ All you have to do is clone the package repository into the `src` forder of your
 
 ```
 # installing package from GitHub
-$ cd ~/ros_ws/src
+$ cd ~/tutorial_ws/src
 $ git clone -b <branch> <address>
 $ cd ..
 $ catkin_make
@@ -215,16 +217,16 @@ Launch files are very handy for running multiple ROS nodes simultaneously. These
 Save the launch file as `<filename>.launch`. Launch files must be put in the `launch` folder in your package, and the Python nodes must be made executable before using.
 
 ```
-$ cd ~/ros_ws/src/ros_tutorial_pkg/scripts
+$ cd ~/tutorial_ws/src/tutorial_pkg/scripts
 $ sudo chmod +x node1_script.py
 ```
 
 After doing that, you have to source your terminal, and use `roslaunch` command to run a launch file.
 
 ```
-$ cd ~/ros_ws
+$ cd ~/tutorial_ws
 $ source devel/setup.bash
-$ roslaunch ros_tutorial_pkg <filename>.launch
+$ roslaunch tutorial_pkg <filename>.launch
 ```
 
 ## Using ROS Packages <a class="anchor" id="usage"></a>
@@ -241,7 +243,7 @@ For C++ nodes, we do not need to do this step.
 Once that's done, we need to source the `setup.bash` file of the workspace in order to use the nodes in the package. We need to repeat this process every time we switch to a new terminal.
 
 ```
-$ cd ~/ros_ws
+$ cd ~/tutorial_ws
 $ source devel/setup.bash
 ```
 
@@ -261,13 +263,13 @@ $ source /opt/ros/noetic/setup.bash # if the ROS version is 'noetic'
 Once all the sourcing is done, we can use `rosrun` command to run a node from the sourced packages.
 
 ```
-$ rosrun ros_tutorial_pkg python_node.py 
+$ rosrun tutorial_pkg python_node.py 
 ```
 
 For C++ nodes, we do not need to mention the extension of file name when running a node.
 
 ```
-$ rosrun ros_tutorial_pkg cpp_node
+$ rosrun tutorial_pkg cpp_node
 ```
 
 We can also check if a certain package exists that can be used using the `rospack find` command.
@@ -282,24 +284,24 @@ If the package exists and is usable, you should see the directory of the package
 
 In the previous topics, we have installed the `turtlesim` package and the `turtlesim_gui` package. The `turtlesim_gui` package contains a python node named `gui.py` that can be used to control the turtle in the `turtlesim_node`. We will run the `turtlesim_node` and `gui.py` nodes, that we can use to play around with the turtlesim.
 
-First, we need to source the `setup.bash` files for ROS and ros_ws.
+First, we need to source the `setup.bash` files for ROS and tutorial_ws.
 
 ```
-$ cd ~/ros_ws
+$ cd ~/tutorial_ws
 $ source devel/setup.bash
 $ source /opt/ros/noetic/setup.bash
 ```
 Before using the `gui.py` node, we need to make the file executable. We will use the `chmod +x` command to make it executable.
 
 ```
-$ sudo chmod +x src/ros_tutorial_pkg/scripts/gui.py
+$ sudo chmod +x src/tutorial_pkg/scripts/gui.py
 ```
 
 Then, we can run the `rosrun` commands to run the nodes we want to run.
 
 ```
 $ rosrun turtlesim turtlesim_node
-$ rosrun ros_tutorial_pkg gui.py
+$ rosrun tutorial_pkg gui.py
 ```
 
 Now, we should see a turtlesim simulation window and a gui window. We can use the buttons in the gui to control the turtle. 
