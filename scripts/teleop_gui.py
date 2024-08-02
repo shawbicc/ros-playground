@@ -7,7 +7,17 @@ import tkinter as tk
 class TeleopGUI:
     def __init__(self, master):
         self.master = master
-        self.master.title("Teleop Control")
+        self.master.minsize(400, 400)
+        self.master.title("Turtlesim Teleop Controller")
+        self.master.configure(bg='orange')
+
+        self.master.columnconfigure(0, weight=1)
+        self.master.columnconfigure(1, weight=1)
+        self.master.columnconfigure(2, weight=1)
+
+        self.master.rowconfigure(0, weight=1)
+        self.master.rowconfigure(1, weight=1)
+        self.master.rowconfigure(2, weight=1)
 
         self.pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)
         rospy.init_node('teleop_gui', anonymous=True)
@@ -15,22 +25,22 @@ class TeleopGUI:
         self.button_forward = tk.Button(master, text="Forward", width=10)
         self.button_forward.bind("<ButtonPress>", self.move_forward)
         self.button_forward.bind("<ButtonRelease>", self.stop)
-        self.button_forward.pack()
+        self.button_forward.grid(row = 0, column = 1, sticky = 'news', pady = 2)
 
         self.button_backward = tk.Button(master, text="Backward", width=10)
         self.button_backward.bind("<ButtonPress>", self.move_backward)
         self.button_backward.bind("<ButtonRelease>", self.stop)
-        self.button_backward.pack()
+        self.button_backward.grid(row = 2, column = 1, sticky = 'news', pady = 2)
 
         self.button_left = tk.Button(master, text="Left", width=10)
         self.button_left.bind("<ButtonPress>", self.move_left)
         self.button_left.bind("<ButtonRelease>", self.stop)
-        self.button_left.pack()
+        self.button_left.grid(row = 1, column = 0, sticky = 'news', pady = 2)
 
         self.button_right = tk.Button(master, text="Right", width=10)
         self.button_right.bind("<ButtonPress>", self.move_right)
         self.button_right.bind("<ButtonRelease>", self.stop)
-        self.button_right.pack()
+        self.button_right.grid(row = 1, column = 2, sticky = 'news', pady = 2)
 
     def move_forward(self, event):
         twist = Twist()
