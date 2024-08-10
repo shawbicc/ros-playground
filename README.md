@@ -319,7 +319,9 @@ $ roslaunch tutorial_pkg <filename>.launch
 
 GitHub repository for the package built in the tutorial: https://github.com/shawbicc/tutorial_pkg.git
 
-GitHub repository for the resources needed for the assignment: https://github.com/shawbicc/ros-playground.git (branch: `ros-noetic-devel`)
+GitHub repository for the resources needed for the assignment: 
+
+https://github.com/shawbicc/ros-playground.git (branch: `ros-noetic-devel`)
 
 Follow along the recorded lecture on ROS Packages for hands-on tutorials and examples on how to create ROS packages and launch files. Be sure to try the codes yourself. Some of the files used in this tutorial are already provided in a GitHub repository. It is highly encouraged to get used to the GitHub workflow and use that with your projects as well.
 
